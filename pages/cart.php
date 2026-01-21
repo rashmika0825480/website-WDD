@@ -2,12 +2,12 @@
 require_once '../includes/db.php';
 include '../includes/header.php';
 
-// Initialize cart if not exists
+// Initializ cart ifn't exists
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 
-// Handle cart updates
+//  cart updates
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['update_cart'])) {
         foreach ($_POST['quantity'] as $key => $qty) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Calculate totals
+// Calculate 
 $subtotal = 0;
 foreach ($_SESSION['cart'] as $item) {
     $subtotal += $item['price'] * $item['quantity'];

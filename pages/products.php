@@ -2,13 +2,13 @@
 require_once '../includes/db.php';
 include '../includes/header.php';
 
-// Get filter parameters
+// filters
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 $color = isset($_GET['color']) ? $_GET['color'] : '';
 $min_price = isset($_GET['min_price']) ? $_GET['min_price'] : 0;
 $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : 1000;
 
-// Build query
+//  query make
 $sql = "SELECT * FROM products WHERE 1=1";
 
 if ($category) {
@@ -34,7 +34,7 @@ $stmt->bindParam(':max_price', $max_price);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Get unique categories and colors
+//  categories - colors
 $categories_stmt = $conn->query("SELECT DISTINCT category FROM products");
 $categories = $categories_stmt->fetchAll(PDO::FETCH_COLUMN);
 
@@ -96,7 +96,7 @@ $colors = $colors_stmt->fetchAll(PDO::FETCH_COLUMN);
 <div class="container">
     <h1 class="section-title">Shop Our Collection</h1>
     
-    <!-- Filters -->
+    <!-- Filter -->
     <div class="filters-section">
         <form method="GET" action="">
             <div class="filters-grid">
@@ -108,7 +108,7 @@ $colors = $colors_stmt->fetchAll(PDO::FETCH_COLUMN);
                             <option value="<?php echo $cat; ?>" 
                                 <?php if($category == $cat) echo 'selected'; ?>>
                                 <?php echo $cat; ?>
-                            </option>
+                           </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -141,7 +141,7 @@ $colors = $colors_stmt->fetchAll(PDO::FETCH_COLUMN);
         </form>
     </div>
     
-    <!-- Products Grid -->
+    <!-- gril prod -->
     <div class="product-grid">
         <?php if(count($products) > 0): ?>
             <?php foreach($products as $product): ?>

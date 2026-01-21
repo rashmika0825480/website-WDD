@@ -1,6 +1,6 @@
-// VelvetVogueSHE JavaScript
+// VelSHE JS
 
-// Smooth scrolling for anchor links
+//  scrolling link
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -13,7 +13,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form validation helper
+//  validation helper
 function validateForm(formId) {
     const form = document.getElementById(formId);
     if (!form) return;
@@ -38,20 +38,20 @@ function validateForm(formId) {
     });
 }
 
-// Image lazy loading
+// Image - loading
 if ('loading' in HTMLImageElement.prototype) {
     const images = document.querySelectorAll('img[loading="lazy"]');
     images.forEach(img => {
         img.src = img.dataset.src;
     });
 } else {
-    // Fallback for browsers that don't support lazy loading
+    // FBack brows no support lazy loading
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
     document.body.appendChild(script);
 }
 
-// Add to cart animation
+// Add  cart anima
 function addToCartAnimation(button) {
     button.textContent = 'Added!';
     button.style.backgroundColor = '#28a745';
@@ -62,7 +62,7 @@ function addToCartAnimation(button) {
     }, 2000);
 }
 
-// Product image zoom on hover (for detail page)
+// Prod img zoom -detail page
 document.querySelectorAll('.product-detail-image').forEach(img => {
     img.addEventListener('mouseenter', function() {
         this.style.transform = 'scale(1.05)';
@@ -74,7 +74,7 @@ document.querySelectorAll('.product-detail-image').forEach(img => {
     });
 });
 
-// Auto-hide success messages
+// Auto-hide suss mgs
 setTimeout(() => {
     const messages = document.querySelectorAll('.success-message, .error-message');
     messages.forEach(msg => {
@@ -84,7 +84,7 @@ setTimeout(() => {
     });
 }, 5000);
 
-// Mobile menu toggle
+// Mobile menu 
 function toggleMobileMenu() {
     const nav = document.querySelector('.main-nav');
     if (nav) {
@@ -110,7 +110,7 @@ function searchProducts() {
     });
 }
 
-// Price range filter
+// Price filter
 function updatePriceRange() {
     const minPrice = document.getElementById('min-price');
     const maxPrice = document.getElementById('max-price');
@@ -125,7 +125,7 @@ function updatePriceRange() {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('VelvetVogueSHE loaded successfully');
     
-    // Add any initialization code here
+    // add any initialization 
     validateForm('checkout-form');
     validateForm('login-form');
 });

@@ -9,7 +9,7 @@ if ($order_id == 0 || !isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Get order details
+//ord dils
 $stmt = $conn->prepare("SELECT * FROM orders WHERE id = :id AND user_id = :user_id");
 $stmt->bindParam(':id', $order_id);
 $stmt->bindParam(':user_id', $_SESSION['user_id']);

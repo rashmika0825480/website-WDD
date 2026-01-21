@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/db.php';
 
-// Check if user is admin
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
     header('Location: ../pages/login.php');
     exit();
@@ -9,18 +8,18 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || !$_SESSION[
 
 include '../includes/header.php';
 
-// Get statistics
+
 $total_products = $conn->query("SELECT COUNT(*) FROM products")->fetchColumn();
 $total_orders = $conn->query("SELECT COUNT(*) FROM orders")->fetchColumn();
 $total_users = $conn->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $total_revenue = $conn->query("SELECT SUM(total_amount) FROM orders")->fetchColumn();
 
-// Get recent orders
+
 $recent_orders = $conn->query("SELECT o.*, u.username FROM orders o 
                               JOIN users u ON o.user_id = u.id 
                               ORDER BY o.created_at DESC LIMIT 10")->fetchAll(PDO::FETCH_ASSOC);
 
-// Handle product addition
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
@@ -163,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
             <div class="success-message"><?php echo $success_msg; ?></div>
         <?php endif; ?>
         
-        <!-- Statistics -->
+        
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number"><?php echo $total_products; ?></div>
@@ -186,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
             </div>
         </div>
         
-        <!-- Add Product Form -->
+       
         <div class="admin-section">
             <h2>Add New Product</h2>
             <form method="POST" action="">
@@ -281,7 +280,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
             </form>
         </div>
         
-        <!-- Recent Orders -->
+        
         <div class="admin-section">
             <h2>Recent Orders</h2>
             <table class="orders-table">

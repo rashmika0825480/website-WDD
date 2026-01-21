@@ -2,7 +2,7 @@
 require_once '../includes/db.php';
 include '../includes/header.php';
 
-// Get product ID
+// pro ID
 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($product_id == 0) {
@@ -10,7 +10,7 @@ if ($product_id == 0) {
     exit();
 }
 
-// Get product details
+// pro detil
 $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
 $stmt->bindParam(':id', $product_id);
 $stmt->execute();
@@ -21,7 +21,7 @@ if (!$product) {
     exit();
 }
 
-// Handle add to cart
+// manage add to cart
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
     $selected_size = isset($_POST['size']) ? $_POST['size'] : '';
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     $success_message = "Product added to cart!";
 }
 
-// Split sizes into array
+// sizes 
 $sizes = explode(',', $product['size']);
 ?>
 

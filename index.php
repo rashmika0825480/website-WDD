@@ -2,13 +2,13 @@
 require_once 'includes/db.php';
 include 'includes/header.php';
 
-// Get featured products
+ // produ
 $stmt = $conn->prepare("SELECT * FROM products WHERE featured = 1 LIMIT 6");
 $stmt->execute();
 $featured_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!-- Hero Section -->
+
 <section class="hero-section">
     <div class="hero-content">
         <h2>Discover Timeless Fashion</h2>
@@ -17,7 +17,7 @@ $featured_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </section>
 
-<!-- Featured Products -->
+<!-- Prod -->
 <section class="products-section">
     <div class="container">
         <h2 class="section-title">Featured Collection</h2>

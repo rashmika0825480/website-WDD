@@ -2,19 +2,19 @@
 require_once '../includes/db.php';
 include '../includes/header.php';
 
-// Check if user is logged in
+// Check if logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
-// Check if cart is empty
+// Check cart empty
 if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
     header('Location: cart.php');
     exit();
 }
 
-// Calculate totals
+//  totals
 $subtotal = 0;
 foreach ($_SESSION['cart'] as $item) {
     $subtotal += $item['price'] * $item['quantity'];
@@ -23,7 +23,7 @@ $tax = $subtotal * 0.08;
 $shipping = $subtotal > 100 ? 0 : 10;
 $total = $subtotal + $tax + $shipping;
 
-// Handle checkout
+//  checkout
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
     $address = trim($_POST['address']);
     $city = trim($_POST['city']);
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
     
     $full_address = "$address, $city, $state $zip. Phone: $phone";
     
-    // Insert order
+    // in order
     $order_stmt = $conn->prepare("INSERT INTO orders (user_id, total_amount, shipping_address, status) 
                                   VALUES (:user_id, :total, :address, 'pending')");
     $order_stmt->bindParam(':user_id', $_SESSION['user_id']);
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
     if ($order_stmt->execute()) {
         $order_id = $conn->lastInsertId();
         
-        // Insert order items
+        // ins order item
         foreach ($_SESSION['cart'] as $item) {
             $item_stmt = $conn->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) 
                                         VALUES (:order_id, :product_id, :quantity, :price)");
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
             $item_stmt->bindParam(':price', $item['price']);
             $item_stmt->execute();
             
-            // Update stock
+            // stock-UP
             $update_stock = $conn->prepare("UPDATE products SET stock_quantity = stock_quantity - :qty 
                                            WHERE id = :id");
             $update_stock->bindParam(':qty', $item['quantity']);
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
             $update_stock->execute();
         }
         
-        // Clear cart
+        // Cart clr
         $_SESSION['cart'] = array();
         
         header('Location: order-success.php?order_id=' . $order_id);

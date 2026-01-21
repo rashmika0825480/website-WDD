@@ -5,7 +5,7 @@ include '../includes/header.php';
 $error = '';
 $success = '';
 
-// -------------------- LOGIN --------------------
+// Log
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     }
 }
 
-// -------------------- REGISTER --------------------
+// Reg
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $full_name = trim($_POST['full_name']);
     $username = trim($_POST['reg_username']);
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 <div class="container">
     <div class="auth-container">
 
-        <!-- LOGIN -->
+        <!--log-->
         <div class="auth-box" id="loginBox">
             <h2>Login</h2>
 
@@ -197,12 +197,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
             </form>
 
             <p class="toggle-text">
-                Don’t have an account?
+                Do not have an account?
                 <a onclick="showRegister()">Register</a>
             </p>
         </div>
 
-        <!-- REGISTER -->
+        <!-- Reg -->
         <div class="auth-box" id="registerBox" style="display:none;">
             <h2>Register</h2>
 

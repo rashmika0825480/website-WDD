@@ -1,4 +1,4 @@
-  <!-- Registration Form -->
+  <!-- Reg form -->
         <div class="auth-box">
             <h2>Register</h2>
             
